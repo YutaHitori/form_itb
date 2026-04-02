@@ -16,7 +16,7 @@ class Pinjam extends StatelessWidget {
         leading: canPop
           ? null : IconButton(
             icon: Icon(Icons.arrow_back_ios),
-            onPressed: () => Get.offNamed('/homepage'),
+            onPressed: () => Get.offNamed('/'),
           ),
         title: Text('Form')
       ),
@@ -38,7 +38,7 @@ class Pinjam extends StatelessWidget {
                 controller: c.nimC,
                 errorText: c.nimE.value,
                 keyboardType: TextInputType.number,
-                inputFormatters: [ FilteringTextInputFormatter.digitsOnly ],
+                inputFormatters: [ FilteringTextInputFormatter.allow(RegExp(r'[0-9\-\/\s]')) ],
               ),
               AutoHideTextField(
                 labelText: 'Dosen',
@@ -50,7 +50,7 @@ class Pinjam extends StatelessWidget {
                 controller: c.nipC,
                 errorText: c.nipE.value,
                 keyboardType: TextInputType.number,
-                inputFormatters: [ FilteringTextInputFormatter.digitsOnly ],
+                inputFormatters: [ FilteringTextInputFormatter.allow(RegExp(r'[0-9\-\/\s]')) ],
               ),
               // AutoHideTextField(
               //   labelText: 'Ketua Prodi',
