@@ -154,8 +154,14 @@ class Pinjam extends StatelessWidget {
                   if (v.length > 10) c.akhirC.text = v.substring(0, 10);
                 },
               ),
-              SizedBox(height: 8,),
-              ElevatedButton(onPressed: c.pinjam, child: Text('pinjam'), style: ElevatedButton.styleFrom(backgroundColor: appTheme.colorScheme.secondary)),
+              SizedBox(height: 8),
+              Row(
+                spacing: 16,
+                children: [
+                  Expanded(child: ElevatedButton(onPressed: c.print, child: Text('print'), style: ElevatedButton.styleFrom(backgroundColor: appTheme.colorScheme.secondary))),
+                  Expanded(child: ElevatedButton(onPressed: c.download, child: Text('download pdf'), style: ElevatedButton.styleFrom(backgroundColor: appTheme.colorScheme.secondary))),
+                ],
+              )
             ],
           )),
         ),

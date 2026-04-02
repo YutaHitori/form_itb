@@ -73,8 +73,7 @@ class FormController extends GetxController {
     Get.back(closeOverlays: true);
   }
 
-  void pinjam() async {
-    final pdf = pw.Document();
+  Future<void> pinjam(pw.Document pdf) async {
     final ttf = await rootBundle.load("fonts/calibri.ttf");
     final ttfBold = await rootBundle.load("fonts/calibri-bold.ttf");
     final ttfItalic = await rootBundle.load("fonts/calibri-italic.ttf");
@@ -235,19 +234,22 @@ class FormController extends GetxController {
             ),
           );
       }));
-      print(pdf);
   }
 
-  void download(pw.Document pdf) async {
+  void download() async {
+    final pdf = pw.Document();
+    await pinjam(pdf);
     var savedFile = await pdf.save();
     List<int> fileInts = List.from(savedFile);
     web.HTMLAnchorElement()
     ..href = "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}"
-    ..setAttribute("download", "Form_Peminjaman_${DateTime.now().millisecondsSinceEpoch}.pdf")
+    ..setAttribute("download", "Form_Peminjaman-${DateTime.now().millisecondsSinceEpoch}.pdf")
     ..click();
   }
 
-  void print(pw.Document pdf) async {
+  void print() async {
+    final pdf = pw.Document();
+    await pinjam(pdf);
     await Printing.layoutPdf(
       onLayout: (format) async => pdf.save(),
     );
