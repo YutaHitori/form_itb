@@ -37,6 +37,7 @@ class FormController extends GetxController {
   final akhirC = TextEditingController();
   final ttdC = TextEditingController();
   final barangC = <TextEditingController>[TextEditingController()].obs;
+  final barangDC = <SingleSelectController<String>>[SingleSelectController<String>('custom')].obs;
   final banyakC = <TextEditingController>[TextEditingController()].obs;
 
   final namaE = Rxn<String>(null); 
@@ -111,7 +112,13 @@ class FormController extends GetxController {
       : DateFormat('d MMMM yyyy', 'id_ID').format((DateTime.parse(mulaiC.text.replaceAll('/', '-'))));
     final akhir = akhirC.text.isBlank() ? null
       : DateFormat('d MMMM yyyy', 'id_ID').format((DateTime.parse(akhirC.text.replaceAll('/', '-'))));
-    final barang = barangC.value.map((e) => e.text.isBlank() ? "_____________________________________________________________________" : e.text.trim()).toList();
+    final barang = barangC.value.map(
+      (e) {
+        var contain = items.where((v) => v.toLowerCase() == e.text.toLowerCase());
+        return e.text.isBlank() 
+          ? "_____________________________________________________________________" 
+          : contain.isEmpty ? e.text.trim() : contain.first;
+      }).toList();
     final banyak = banyakC.value.map((e) => e.text.isBlank() ? "" : ' x' + e.text.trim()).toList();
 
     pdf.addPage(pw.MultiPage(

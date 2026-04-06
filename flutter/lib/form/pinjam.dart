@@ -29,13 +29,16 @@ class Pinjam extends StatelessWidget {
             spacing: 8,
             children: [
               Text('Form Peminjaman Peralatan Laboratorium Dasar Teknik Elektro Sekolah Teknik Elektro dan Informatika', textScaleFactor: 1.4),
+              Text('Catatan: Kosongkan kolom jika ingin diisi menggunakan pulpen',),
               AutoHideTextField(
                 labelText: 'Nama',
+                decoration: InputDecoration(hintText: '-'),
                 controller: c.namaC,
                 errorText: c.namaE.value,
               ),
               AutoHideTextField(
                 labelText: 'NIM',
+                decoration: InputDecoration(hintText: '-'),
                 controller: c.nimC,
                 errorText: c.nimE.value,
                 keyboardType: TextInputType.number,
@@ -47,16 +50,20 @@ class Pinjam extends StatelessWidget {
                 children: [
                   Text('Fakultas/Sekolah ', textScaleFactor: 1.02,),
                   DropdownFlutter<String>(
-                    listItemBuilder: (context, item, isSelected, onItemSelect) => Text('${item}', style: TextStyle(color: isSelected ? Colors.black : null),),
+                    listItemBuilder: (context, item, isSelected, onItemSelect) => 
+                      Text('${item}', style: TextStyle(color: item == 'reset' ? Colors.red : isSelected ? Colors.black : null)),
                     decoration: CustomDropdownDecoration(
                       expandedFillColor: appTheme.inputDecorationTheme.fillColor,
                       closedFillColor: appTheme.inputDecorationTheme.fillColor,
                       listItemStyle: TextStyle(color: Colors.black),
                     ),
                     excludeSelected: false,
-                    items: fakultas,
+                    items: ['reset', ...fakultas],
                     controller: c.fakultasC,
-                    onChanged: (value) => c.setProdi(),
+                    onChanged: (value) { 
+                      if (value == 'reset') c.fakultasC.value = null;
+                      c.setProdi(); 
+                    },
                   ),
                 ],
               ),
@@ -66,26 +73,31 @@ class Pinjam extends StatelessWidget {
                 children: [
                   Text('Program Studi ', textScaleFactor: 1.02,),
                   DropdownFlutter<String>(
-                    listItemBuilder: (context, item, isSelected, onItemSelect) => Text('${item}', style: TextStyle(color: isSelected ? Colors.black : null),),
+                    listItemBuilder: (context, item, isSelected, onItemSelect) => 
+                      Text('${item}', style: TextStyle(color: item == 'reset' ? Colors.red : isSelected ? Colors.black : null)),
                     decoration: CustomDropdownDecoration(
                       expandedFillColor: appTheme.inputDecorationTheme.fillColor,
                       closedFillColor: appTheme.inputDecorationTheme.fillColor,
                       listItemStyle: TextStyle(color: Colors.black),
                     ),
                     excludeSelected: false,
-                    items: c.prodiList.value,
+                    items: ['reset', ...c.prodiList.value],
                     controller: c.prodiC,
-                    onChanged: (value) => {},
+                    onChanged: (value) {
+                      if (value == 'reset') c.prodiC.value = null;
+                    },
                   ),
                 ],
               ),
               AutoHideTextField(
                 labelText: 'Dosen Pembimbing',
+                decoration: InputDecoration(hintText: '-'),
                 controller: c.dosenC,
                 errorText: c.dosenE.value,
               ),
               AutoHideTextField(
                 labelText: 'NIP',
+                decoration: InputDecoration(hintText: '-'),
                 controller: c.nipC,
                 errorText: c.nipE.value,
                 keyboardType: TextInputType.number,
@@ -93,6 +105,7 @@ class Pinjam extends StatelessWidget {
               ),
               AutoHideTextField(
                 labelText: 'Ketua Prodi',
+                decoration: InputDecoration(hintText: '-'),
                 controller: c.ketuaC,
                 errorText: c.ketuaE.value,
               ),
@@ -108,11 +121,13 @@ class Pinjam extends StatelessWidget {
                 itemCount: c.barangC.value.length,
                 separatorBuilder: (context, index) => SizedBox(height: 4),
                 itemBuilder: (context, i) {
+                  var change = true;
                   return Row(
                     spacing: 8,
                     children: [
                       Expanded(
                         child: DropdownFlutter<String>.search(
+                          controller: c.barangDC.value[i],
                           expandedHeaderPadding: EdgeInsets.only(right: 12),
                           closedHeaderPadding: EdgeInsets.only(right: 8),
                           hideSelectedFieldWhenExpanded: true,
@@ -127,14 +142,23 @@ class Pinjam extends StatelessWidget {
                             return TextField(
                               controller: c.barangC.value[i],
                               decoration: InputDecoration(hintText: 'Nama Barang'),
+                              onChanged: (value) {
+                                change = false;
+                                var contain = items.where((v) => v.toLowerCase() == value.toLowerCase());
+                                if (contain.isEmpty) {
+                                  c.barangDC.value[i].value = 'custom';
+                                } else c.barangDC.value[i].value = contain.first;
+                                change = true;
+                              },
                             );
                           },
                           excludeSelected: false,
                           items: items,
-                          initialItem: 'custom',
                           hintText: 'select',
                           onChanged: (v) {
-                            var text = v == 'custom' ? '' : v;
+                            if (!change) return;
+                            var text = v;
+                            if (v == 'custom') text = null;
                             c.barangC.value[i] = TextEditingController(text: text);
                           },
                         ),
@@ -151,6 +175,7 @@ class Pinjam extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () { 
+                          c.barangDC.value.removeAt(i); c.barangDC.refresh(); 
                           c.barangC.value.removeAt(i); c.barangC.refresh(); 
                           c.banyakC.value.removeAt(i); c.banyakC.refresh(); 
                         },
@@ -163,6 +188,7 @@ class Pinjam extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: ElevatedButton(onPressed: () {
+                  c.barangDC.add(SingleSelectController<String>('custom'));
                   c.barangC.add(TextEditingController());
                   c.banyakC.add(TextEditingController());
                 }, child: Icon(Icons.add)),
