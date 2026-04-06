@@ -305,7 +305,7 @@ class FormController extends GetxController {
               child: Row(
                 spacing: 8,
                 children: [
-                  Expanded(child: ElevatedButton(onPressed: print, child: Text('Print'))),
+                  Expanded(child: ElevatedButton(onPressed: print, child: Text('Print'), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8B2E3C)))),
                   Expanded(child: ElevatedButton(onPressed: download, child: Text('Download'), style: ElevatedButton.styleFrom(backgroundColor: appTheme.colorScheme.tertiary))),
                 ],
               ),

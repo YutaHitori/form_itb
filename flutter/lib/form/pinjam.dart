@@ -190,7 +190,7 @@ class Pinjam extends StatelessWidget {
                   c.barangDC.add(SingleSelectController<String>('custom'));
                   c.barangC.add(TextEditingController());
                   c.banyakC.add(TextEditingController());
-                }, child: Icon(Icons.add)),
+                }, child: Icon(Icons.add), style: ElevatedButton.styleFrom(backgroundColor: appTheme.colorScheme.secondary)),
               ),
               AutoHideTextField(
                 labelText: 'Tanggal Pinjam',
@@ -219,7 +219,7 @@ class Pinjam extends StatelessWidget {
                 },
               ),
               SizedBox(height: 8),
-              ElevatedButton(onPressed: c.preview, child: Text('Pinjam'), style: ElevatedButton.styleFrom(backgroundColor: appTheme.colorScheme.secondary)),
+              ElevatedButton(onPressed: c.preview, child: Text('Pinjam')),
             ],
           )),
         ),

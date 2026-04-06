@@ -13,7 +13,7 @@ ThemeData appTheme = ThemeData(
 
   // Color Scheme (Flutter 3+ standard)
   colorScheme: const ColorScheme.dark(
-    primary: Color(0xFF8B2E3C),
+    primary: Color(0xFF0D6EFD),
     secondary: Color(0xFFFD9A30),
     tertiary: Color(0xFFA4C639),
     surface: Color(0xFF252525),
@@ -67,7 +67,7 @@ ThemeData appTheme = ThemeData(
   // Buttons
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: const Color(0xFF8B2E3C),
+      backgroundColor: const Color(0xFF0D6EFD),
       foregroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
