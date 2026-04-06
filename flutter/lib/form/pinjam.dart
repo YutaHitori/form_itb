@@ -19,7 +19,7 @@ class Pinjam extends StatelessWidget {
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () => Get.offNamed('/'),
           ),
-        title: Text('Form')
+        title: Text('Form Peminjaman Peralatan')
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -28,8 +28,7 @@ class Pinjam extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: 8,
             children: [
-              Text('Form Peminjaman Peralatan Laboratorium Dasar Teknik Elektro Sekolah Teknik Elektro dan Informatika', textScaleFactor: 1.4),
-              Text('Catatan: Kosongkan kolom jika ingin diisi menggunakan pulpen',),
+              Text('Catatan: Kosongkan kolom jika ingin diisi menggunakan menggunakan tulisan tangan',),
               AutoHideTextField(
                 labelText: 'Nama',
                 decoration: InputDecoration(hintText: '-'),
