@@ -30,7 +30,9 @@ class FormController extends GetxController {
   final fakultasC = SingleSelectController<String>(null);
   final prodiC = SingleSelectController<String>(null);
   final dosenC = TextEditingController();
+  final nipDosenC = TextEditingController();
   final ketuaC = TextEditingController();
+  final nipKetuaC = TextEditingController();
   final mulaiC = TextEditingController();
   final akhirC = TextEditingController();
   final ttdC = TextEditingController();
@@ -41,7 +43,9 @@ class FormController extends GetxController {
   final namaE = Rxn<String>(null); 
   final nimE = Rxn<String>(null); 
   final dosenE = Rxn<String>(null); 
+  final nipDosenE = Rxn<String>(null); 
   final ketuaE = Rxn<String>(null);  
+  final nipKetuaE = Rxn<String>(null);  
   final mulaiE = Rxn<String>(null); 
   final akhirE = Rxn<String>(null); 
   final barangE = Rxn<String>(null); 
@@ -103,7 +107,9 @@ class FormController extends GetxController {
     final fakultas = regexp.firstMatch(fakultasC.value ?? '')?.group(1);
     final prodi = prodiC.value?.replaceAll(RegExp(r'\((.*?)\)'), '').trim();
     final dosen = dosenC.text.isBlank() ? null : dosenC.text.trim();
+    final nipDosen = nipDosenC.text.isBlank() ? null : nipDosenC.text.trim();
     final ketua = ketuaC.text.isBlank() ? null : ketuaC.text.trim();
+    final nipKetua = nipKetuaC.text.isBlank() ? null : nipKetuaC.text.trim();
     final mulai = mulaiC.text.isBlank() ? null
       : DateFormat('d MMMM yyyy', 'id_ID').format((DateTime.parse(mulaiC.text.replaceAll('/', '-'))));
     final akhir = akhirC.text.isBlank() ? null
@@ -241,7 +247,7 @@ class FormController extends GetxController {
                         pw.SizedBox(height: 40,),
                         pw.Text('Nama: ${dosen ?? ''}'),
                         pw.SizedBox(height: 5),
-                        pw.Text('NIP:'),
+                        pw.Text('NIP: ${nipDosen ?? ''}'),
                       ]
                     ),
                   ]
@@ -263,7 +269,7 @@ class FormController extends GetxController {
                         children: [
                           pw.Text("Nama: ${ketua ?? ""}"),
                           pw.SizedBox(height: 5),
-                          pw.Text('NIP:'),
+                          pw.Text('NIP: ${nipKetua ?? ''}'),
                         ]
                       ),
                     )

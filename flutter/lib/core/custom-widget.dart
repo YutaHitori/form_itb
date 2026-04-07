@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Assets {
-  static const String x = 'assets/x.png';
+  static const String logo = 'assets/logo.png';
 }
 
 ThemeData appTheme = ThemeData(
@@ -116,90 +116,6 @@ ThemeData appTheme = ThemeData(
   // Divider
   dividerColor: const Color(0xFF2C2C2C),
 );
-
-
-// class FilterRow extends StatelessWidget {
-//   const FilterRow({
-//     super.key,
-//     required this.controller,
-//     required this.filterKey,
-//   });
-
-//   final QFSController controller;
-//   final String filterKey;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var map = controller.getFilterEnrty(filterKey).value;
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//         children: [
-//           TextButton(
-//             onPressed: () => controller.onChanged('all', filterKey),
-//             child: Text('all'),
-//             style: TextButton.styleFrom(
-//               backgroundColor: map['all']!
-//                 ? appTheme.colorScheme.primary : null,
-//               foregroundColor: map['all']!
-//                 ? Colors.white : null,
-//             ),
-//           ),
-//           Expanded(
-//             child: SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: Row(
-//                 children: [
-//                   for (var item in map.entries) ...[
-//                     if (item.key != 'all') TextButton(
-//                       onPressed: () => controller.onChanged(item.key, filterKey),
-//                       child: Text(item.key),
-//                       style: TextButton.styleFrom(
-//                         backgroundColor: item.value
-//                           ? appTheme.colorScheme.secondary : null,
-//                         foregroundColor: item.value
-//                           ? Colors.white : null,
-//                       ),
-//                     ),
-//                   ]
-//                 ],
-//               ),
-//             ),
-//           )
-//         ]
-//       );
-//   }
-// }
-
-// class SortRow extends StatelessWidget {
-//   const SortRow({
-//     super.key,
-//     required this.controller,
-//   });
-
-//   final QFSController controller;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       children: [
-//         Text('Sort by :  '),
-//         Expanded(
-//           child: DropdownFlutter(
-//             decoration: CustomDropdownDecoration(
-//               closedFillColor: appTheme.inputDecorationTheme.fillColor,
-//               listItemStyle: TextStyle(color: ThemeData.dark().primaryColor),
-//             ),
-            
-//             excludeSelected: false,
-//             items: ['Latest', 'Oldest', 'Name (A-Z)', 'Name (Z-A)'],
-//             controller: controller.sortController,
-//             onChanged: (value) => controller.onChanged(),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
 
 class AutoHideTextField extends StatelessWidget {
   const AutoHideTextField({
