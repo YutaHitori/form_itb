@@ -60,7 +60,7 @@ class FormController extends GetxController {
   }
 
   var now = DateTime.parse(DateTime.now().toString().split(' ').first);
-  late var limit = now.add(Duration(days: 28)).subtract(Duration(milliseconds: 1));
+  late var limit = now.add(Duration(days: 180)).subtract(Duration(milliseconds: 1));
 
   void pickDate(context, TextEditingController date) async {
     var initial = DateTime.tryParse(date.text.replaceAll('/', '-')) ?? now;
